@@ -20,7 +20,7 @@ class FormsController
         $services = Database::select(
             "SELECT id, name FROM services WHERE status='published' AND deleted_at IS NULL ORDER BY sort_order ASC"
         );
-        View::render('contact/index', [
+        echo View::render('contact/index', [
             'title'           => 'Contact Us — The Paragon .Design',
             'metaDescription' => 'Send us a message. We respond within one business day.',
             'services'        => $services,
@@ -32,7 +32,7 @@ class FormsController
         $services = Database::select(
             "SELECT id, name FROM services WHERE status='published' AND deleted_at IS NULL ORDER BY sort_order ASC"
         );
-        View::render('forms/quote', [
+        echo View::render('forms/quote', [
             'title'           => 'Get a Free Quote — The Paragon .Design',
             'metaDescription' => 'Request a tailored quote for web design, branding or digital marketing.',
             'services'        => $services,
@@ -41,7 +41,7 @@ class FormsController
 
     public function consultation(Request $request): void
     {
-        View::render('forms/consultation', [
+        echo View::render('forms/consultation', [
             'title'           => 'Book a Free Consultation — The Paragon .Design',
             'metaDescription' => 'Book a free 30-minute strategy call with our team. No obligation.',
         ]);
@@ -49,7 +49,7 @@ class FormsController
 
     public function audit(Request $request): void
     {
-        View::render('forms/audit', [
+        echo View::render('forms/audit', [
             'title'           => 'Free Website Audit — The Paragon .Design',
             'metaDescription' => 'Get a free performance, SEO, mobile, and security audit for your website.',
         ]);
@@ -73,7 +73,7 @@ class FormsController
             $services = Database::select(
                 "SELECT id, name FROM services WHERE status='published' AND deleted_at IS NULL ORDER BY sort_order ASC"
             );
-            View::render('contact/index', [
+            echo View::render('contact/index', [
                 'title'    => 'Contact Us — The Paragon .Design',
                 'services' => $services,
                 'errors'   => $errors,
@@ -85,7 +85,7 @@ class FormsController
         $this->notifyTeam($request, 'Contact Enquiry', $leadId);
         $this->confirmToUser($request->input('email'), $request->input('name', ''), 'contact');
 
-        View::render('contact/index', [
+        echo View::render('contact/index', [
             'title'    => 'Contact Us — The Paragon .Design',
             'services' => [],
             'success'  => true,
@@ -109,7 +109,7 @@ class FormsController
             $services = Database::select(
                 "SELECT id, name FROM services WHERE status='published' AND deleted_at IS NULL ORDER BY sort_order ASC"
             );
-            View::render('forms/quote', ['title' => 'Get a Free Quote', 'services' => $services, 'errors' => $errors]);
+            echo View::render('forms/quote', ['title' => 'Get a Free Quote', 'services' => $services, 'errors' => $errors]);
             return;
         }
 
@@ -117,7 +117,7 @@ class FormsController
         $this->notifyTeam($request, 'Quote Request', $leadId);
         $this->confirmToUser($request->input('email'), $request->input('name', ''), 'quote');
 
-        View::render('forms/quote', ['title' => 'Get a Free Quote', 'services' => [], 'success' => true]);
+        echo View::render('forms/quote', ['title' => 'Get a Free Quote', 'services' => [], 'success' => true]);
     }
 
     public function submitConsultation(Request $request): void
@@ -133,7 +133,7 @@ class FormsController
         $errors = $v->errors();
 
         if ($v->fails()) {
-            View::render('forms/consultation', ['title' => 'Book Consultation', 'errors' => $errors]);
+            echo View::render('forms/consultation', ['title' => 'Book Consultation', 'errors' => $errors]);
             return;
         }
 
@@ -141,7 +141,7 @@ class FormsController
         $this->notifyTeam($request, 'Consultation Request', $leadId);
         $this->confirmToUser($request->input('email'), $request->input('name', ''), 'consultation');
 
-        View::render('forms/consultation', ['title' => 'Book Consultation', 'success' => true]);
+        echo View::render('forms/consultation', ['title' => 'Book Consultation', 'success' => true]);
     }
 
     public function submitAudit(Request $request): void
@@ -157,7 +157,7 @@ class FormsController
         $errors = $v->errors();
 
         if ($v->fails()) {
-            View::render('forms/audit', ['title' => 'Free Website Audit', 'errors' => $errors]);
+            echo View::render('forms/audit', ['title' => 'Free Website Audit', 'errors' => $errors]);
             return;
         }
 
@@ -181,7 +181,7 @@ class FormsController
         $this->notifyTeam($request, 'Website Audit Request', $leadId);
         $this->confirmToUser($request->input('email'), $request->input('name', ''), 'audit');
 
-        View::render('forms/audit', ['title' => 'Free Website Audit', 'success' => true]);
+        echo View::render('forms/audit', ['title' => 'Free Website Audit', 'success' => true]);
     }
 
     /* ── Private helpers ────────────────────────────────────── */

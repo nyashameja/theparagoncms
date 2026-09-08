@@ -14,7 +14,7 @@ class ServicesController
             "SELECT * FROM services WHERE status='published' AND deleted_at IS NULL ORDER BY sort_order ASC"
         );
 
-        View::render('services/index', [
+        echo View::render('services/index', [
             'title'           => 'Services — The Paragon .Design',
             'metaDescription' => 'Web design, branding, SEO, and digital marketing services for South African businesses.',
             'services'        => $services,
@@ -40,7 +40,7 @@ class ServicesController
             [$service['id']]
         );
 
-        View::render('services/show', [
+        echo View::render('services/show', [
             'title'           => ($service['meta_title'] ?: $service['name'] . ' — The Paragon .Design'),
             'metaDescription' => $service['meta_description'] ?? $service['short_description'] ?? '',
             'service'         => $service,

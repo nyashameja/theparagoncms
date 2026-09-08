@@ -27,7 +27,7 @@ class IndustryController
             [$industry['id']]
         );
 
-        View::render('industries/show', [
+        echo View::render('industries/show', [
             'title'           => 'Web Design for ' . $industry['name'] . ' — The Paragon .Design',
             'metaDescription' => $industry['meta_description'] ?? ('Premium web design and digital marketing services for ' . $industry['name'] . ' businesses in South Africa.'),
             'industry'        => $industry,

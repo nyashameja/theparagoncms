@@ -32,7 +32,7 @@ class HomeController
              ORDER BY a.published_at DESC LIMIT 3"
         );
 
-        View::render('home/index', [
+        echo View::render('home/index', [
             'title'        => null,
             'services'     => $services,
             'projects'     => $projects,

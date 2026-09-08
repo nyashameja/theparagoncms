@@ -19,7 +19,7 @@ class CaseStudyController
              ORDER BY cs.sort_order ASC, cs.created_at DESC"
         );
 
-        View::render('case-studies/index', [
+        echo View::render('case-studies/index', [
             'title'        => 'Case Studies — The Paragon .Design',
             'metaDescription' => 'Real results for South African businesses. See how The Paragon .Design has helped clients grow online.',
             'caseStudies'  => $caseStudies,
@@ -38,7 +38,7 @@ class CaseStudyController
         );
         if (!$cs) abort(404);
 
-        View::render('case-studies/show', [
+        echo View::render('case-studies/show', [
             'title'           => $cs['title'] . ' — Case Study',
             'metaDescription' => $cs['excerpt'] ?? '',
             'caseStudy'       => $cs,

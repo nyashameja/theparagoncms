@@ -31,7 +31,7 @@ class PortfolioController
 
         $totalPages = max(1, (int)ceil($total / $perPage));
 
-        View::render('portfolio/index', [
+        echo View::render('portfolio/index', [
             'title'           => 'Portfolio — The Paragon .Design',
             'metaDescription' => 'Browse our portfolio of web design, branding, and digital marketing projects for South African businesses.',
             'projects'        => $projects,
@@ -70,7 +70,7 @@ class PortfolioController
             [$project['service_id'], $project['id']]
         );
 
-        View::render('portfolio/show', [
+        echo View::render('portfolio/show', [
             'title'           => $project['meta_title'] ?: $project['title'],
             'metaDescription' => $project['meta_description'] ?? $project['excerpt'] ?? '',
             'project'         => $project,

@@ -20,7 +20,7 @@ class LocationController
             "SELECT * FROM services WHERE status='published' AND deleted_at IS NULL ORDER BY sort_order ASC LIMIT 6"
         );
 
-        View::render('locations/show', [
+        echo View::render('locations/show', [
             'title'           => 'Web Design ' . ($location['type'] === 'primary' ? 'in ' : 'for ') . $location['name'] . ' — The Paragon .Design',
             'metaDescription' => $location['meta_description'] ?? ('Premium web design and digital marketing ' . ($location['type'] === 'primary' ? 'in ' : 'for ') . $location['name'] . '.'),
             'location'        => $location,

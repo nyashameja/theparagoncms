@@ -23,7 +23,7 @@ class PackagesController
         }
         unset($pkg);
 
-        View::render('packages/index', [
+        echo View::render('packages/index', [
             'title'           => 'Packages & Pricing — The Paragon .Design',
             'metaDescription' => 'Transparent pricing for premium web design, branding, and digital marketing services. All packages are customisable.',
             'packages'        => $packages,

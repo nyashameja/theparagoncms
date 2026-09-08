@@ -16,7 +16,7 @@ class PageController
         );
         if (!$page) abort(404);
 
-        View::render('pages/show', [
+        echo View::render('pages/show', [
             'title'           => ($page['meta_title'] ?: $page['title']),
             'metaDescription' => $page['meta_description'] ?? '',
             'noindex'         => $page['noindex'] ?? false,

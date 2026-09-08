@@ -36,7 +36,7 @@ class BlogController
 
         $totalPages = max(1, (int)ceil($total / $this->perPage));
 
-        View::render('blog/index', [
+        echo View::render('blog/index', [
             'title'           => 'Blog — The Paragon .Design',
             'metaDescription' => 'Digital marketing insights, web design tips, and business growth strategies for South African companies.',
             'articles'        => $articles,
@@ -79,7 +79,7 @@ class BlogController
 
         $totalPages = max(1, (int)ceil($total / $this->perPage));
 
-        View::render('blog/category', [
+        echo View::render('blog/category', [
             'title'           => $category['name'] . ' — Blog',
             'metaDescription' => $category['description'] ?? '',
             'category'        => $category,
@@ -109,7 +109,7 @@ class BlogController
             [$tag['id'], $this->perPage, $offset]
         );
 
-        View::render('blog/category', [
+        echo View::render('blog/category', [
             'title'           => '#' . $tag['name'] . ' — Blog',
             'category'        => ['name' => $tag['name'], 'description' => '', 'slug' => $tag['slug']],
             'articles'        => $articles,
@@ -150,7 +150,7 @@ class BlogController
             [$article['category_id'], $article['id']]
         );
 
-        View::render('blog/show', [
+        echo View::render('blog/show', [
             'title'           => $article['meta_title'] ?: $article['title'],
             'metaDescription' => $article['meta_description'] ?? $article['excerpt'] ?? '',
             'ogType'          => 'article',
