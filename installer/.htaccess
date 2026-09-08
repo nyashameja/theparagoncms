@@ -1,0 +1,12 @@
+# Block access entirely if installer is locked
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [QSA,L]
+</IfModule>
+
+# Deny direct access to lock file
+<Files ".installed">
+Order allow,deny
+Deny from all
+</Files>
