@@ -54,9 +54,8 @@ class MediaController
         exit;
     }
 
-    public function update(Request $request, array $params): void
+    public function update(Request $request, int $id): void
     {
-        $id = (int) $params['id'];
         $media = Database::selectOne('SELECT * FROM media WHERE id = ?', [$id]);
         if (!$media) abort(404);
 
@@ -75,9 +74,8 @@ class MediaController
         redirect('/admin/media');
     }
 
-    public function delete(Request $request, array $params): void
+    public function delete(Request $request, int $id): void
     {
-        $id    = (int) $params['id'];
         $media = Database::selectOne('SELECT * FROM media WHERE id = ?', [$id]);
         if (!$media) abort(404);
 

@@ -19,7 +19,7 @@ if (!empty($settings['maintenance_mode']) && $settings['maintenance_mode'] === '
     $path = $_SERVER['REQUEST_URI'] ?? '/';
     if (!str_starts_with($path, '/admin')) {
         http_response_code(503);
-        echo \App\Support\View::render('public.maintenance', [
+        echo \App\Support\View::render('errors/maintenance', [
             'title'   => 'Maintenance Mode | The Paragon .Design',
             'message' => $settings['maintenance_message'] ?? 'We\'ll be back shortly.',
         ]);

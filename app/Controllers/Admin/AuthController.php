@@ -110,9 +110,8 @@ class AuthController
         redirect('/admin/forgot-password');
     }
 
-    public function resetForm(Request $request, array $params): string
+    public function resetForm(Request $request, string $token): string
     {
-        $token  = $params['token'] ?? '';
         $record = User::findByResetToken($token);
         if (!$record) {
             Session::flash('error', 'This reset link is invalid or has expired.');

@@ -42,16 +42,15 @@ class ServicesController
         redirect('/admin/services/' . $id . '/edit');
     }
 
-    public function edit(Request $request, array $params): string
+    public function edit(Request $request, int $id): string
     {
-        $service = Service::getWithRelated((int) $params['id']);
+        $service = Service::getWithRelated($id);
         if (!$service) abort(404);
         return view('admin.services.form', ['title' => 'Edit Service', 'service' => $service]);
     }
 
-    public function update(Request $request, array $params): void
+    public function update(Request $request, int $id): void
     {
-        $id = (int) $params['id'];
         $v  = Validator::make($request->body, [
             'name'   => 'required|max:200',
             'slug'   => 'required|max:200|unique:services,slug,' . $id,
@@ -70,9 +69,8 @@ class ServicesController
         redirect('/admin/services/' . $id . '/edit');
     }
 
-    public function delete(Request $request, array $params): void
+    public function delete(Request $request, int $id): void
     {
-        $id = (int) $params['id'];
         Service::delete($id);
         Logger::audit('service_deleted', ['id' => $id]);
         Session::flash('success', 'Service deleted.');

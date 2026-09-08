@@ -175,6 +175,14 @@ $router->group(['prefix' => '/admin', 'middleware' => ['csrf']], function (Route
         $router->post('/settings/integrations', [\App\Controllers\Admin\SettingsController::class, 'saveIntegrations']);
         $router->post('/settings/maintenance', [\App\Controllers\Admin\SettingsController::class, 'maintenanceMode']);
 
+        // Pages
+        $router->get('/pages', [\App\Controllers\Admin\PagesController::class, 'index']);
+        $router->get('/pages/create', [\App\Controllers\Admin\PagesController::class, 'create']);
+        $router->post('/pages', [\App\Controllers\Admin\PagesController::class, 'store']);
+        $router->get('/pages/{id}/edit', [\App\Controllers\Admin\PagesController::class, 'edit']);
+        $router->post('/pages/{id}', [\App\Controllers\Admin\PagesController::class, 'update']);
+        $router->post('/pages/{id}/delete', [\App\Controllers\Admin\PagesController::class, 'destroy']);
+
         // Menus
         $router->get('/menus', [\App\Controllers\Admin\MenusController::class, 'index']);
         $router->get('/menus/create', [\App\Controllers\Admin\MenusController::class, 'create']);

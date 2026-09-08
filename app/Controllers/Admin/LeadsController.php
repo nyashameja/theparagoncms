@@ -33,9 +33,9 @@ class LeadsController
         ]);
     }
 
-    public function show(Request $request, array $params): string
+    public function show(Request $request, int $id): string
     {
-        $lead = Lead::getWithRelated((int) $params['id']);
+        $lead = Lead::getWithRelated($id);
         if (!$lead) abort(404);
 
         // Log access for POPIA
@@ -51,9 +51,9 @@ class LeadsController
         ]);
     }
 
-    public function update(Request $request, array $params): void
+    public function update(Request $request, int $id): void
     {
-        $lead = Lead::find((int) $params['id']);
+        $lead = Lead::find($id);
         if (!$lead) abort(404);
 
         $data = [];
@@ -80,9 +80,9 @@ class LeadsController
         redirect('/admin/leads/' . $lead['id']);
     }
 
-    public function addNote(Request $request, array $params): void
+    public function addNote(Request $request, int $id): void
     {
-        $lead = Lead::find((int) $params['id']);
+        $lead = Lead::find($id);
         if (!$lead) abort(404);
 
         $content = trim($request->get('content', ''));
@@ -98,9 +98,9 @@ class LeadsController
         redirect('/admin/leads/' . $lead['id']);
     }
 
-    public function delete(Request $request, array $params): void
+    public function delete(Request $request, int $id): void
     {
-        $lead = Lead::find((int) $params['id']);
+        $lead = Lead::find($id);
         if (!$lead) abort(404);
 
         Lead::delete($lead['id']);

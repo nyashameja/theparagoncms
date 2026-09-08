@@ -54,9 +54,9 @@ class ArticlesController
         redirect('/admin/articles/' . $id . '/edit');
     }
 
-    public function edit(Request $request, array $params): string
+    public function edit(Request $request, int $id): string
     {
-        $article = Article::find((int) $params['id']);
+        $article = Article::find($id);
         if (!$article) abort(404);
         $article['tags'] = Article::getTags($article['id']);
         return view('admin.articles.form', [
@@ -66,10 +66,9 @@ class ArticlesController
         ]);
     }
 
-    public function update(Request $request, array $params): void
+    public function update(Request $request, int $id): void
     {
-        $id = (int) $params['id'];
-        $v  = Validator::make($request->body, [
+        $v = Validator::make($request->body, [
             'title'  => 'required|max:300',
             'slug'   => 'required|max:300|unique:articles,slug,' . $id,
             'status' => 'required|in:draft,review,scheduled,published,archived',
@@ -94,9 +93,8 @@ class ArticlesController
         redirect('/admin/articles/' . $id . '/edit');
     }
 
-    public function delete(Request $request, array $params): void
+    public function delete(Request $request, int $id): void
     {
-        $id = (int) $params['id'];
         Article::delete($id);
         Logger::audit('article_deleted', ['id' => $id]);
         Session::flash('success', 'Article deleted.');

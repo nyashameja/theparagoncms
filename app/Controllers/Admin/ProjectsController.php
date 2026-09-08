@@ -53,9 +53,9 @@ class ProjectsController
         redirect('/admin/projects/' . $id . '/edit');
     }
 
-    public function edit(Request $request, array $params): string
+    public function edit(Request $request, int $id): string
     {
-        $project = Project::getWithRelated((int) $params['id']);
+        $project = Project::getWithRelated($id);
         if (!$project) abort(404);
         return view('admin.projects.form', [
             'title'      => 'Edit Project',
@@ -65,10 +65,9 @@ class ProjectsController
         ]);
     }
 
-    public function update(Request $request, array $params): void
+    public function update(Request $request, int $id): void
     {
-        $id = (int) $params['id'];
-        $v  = Validator::make($request->body, [
+        $v = Validator::make($request->body, [
             'title'  => 'required|max:200',
             'slug'   => 'required|max:200|unique:projects,slug,' . $id,
             'status' => 'required|in:draft,review,published,archived',
@@ -86,9 +85,8 @@ class ProjectsController
         redirect('/admin/projects/' . $id . '/edit');
     }
 
-    public function delete(Request $request, array $params): void
+    public function delete(Request $request, int $id): void
     {
-        $id = (int) $params['id'];
         Project::delete($id);
         Logger::audit('project_deleted', ['id' => $id]);
         Session::flash('success', 'Project deleted.');
